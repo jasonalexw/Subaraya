@@ -72,21 +72,27 @@ Streaming tidak menggunakan staging table batch.
 
 ## Struktur proyek
 
+## Struktur proyek
+
 ```text
-metropolia-etl/
+Subaraya/
 ├── dags/
 │   └── metropolia_pipeline_dag.py
 ├── data/
-│   ├── raw/
-│   ├── reference/
-│   ├── batch/
-│   ├── canonical/
-│   ├── quarantine/
-│   └── stream/
-├── models/
+│   ├── raw/                  # data sumber ETL
+│   ├── reference/            # kalender simulasi dan referensi zona
+│   ├── batch/                # input simulasi batch harian
+│   ├── canonical/            # keluaran Parquet hasil transformasi
+│   ├── quarantine/           # data yang gagal validasi
+│   └── stream/               # data pendukung simulasi streaming
+├── data_raw/                 # ekspor data PostgreSQL untuk dashboard
+├── ml/                       # pelatihan dan penggunaan model
 ├── scripts/
 │   ├── check_input.py
-│   └── spark_metropolia_etl.py
+│   ├── spark_metropolia_etl.py
+│   ├── aggregate.py
+│   ├── predict.py
+│   └── generate-mock.mjs
 ├── sql/
 │   ├── init.sql
 │   ├── init_streaming.sql
@@ -97,10 +103,22 @@ metropolia-etl/
 │   ├── spark_streaming_metropolia.py
 │   ├── Dockerfile.producer
 │   └── Dockerfile.spark
-├── tests/
-├── .env.example
+├── src/
+│   ├── components/           # komponen antarmuka dashboard
+│   ├── pages/                # halaman dashboard
+│   ├── store/                # pengelolaan state
+│   ├── hooks/                # React hooks
+│   ├── lib/                  # fungsi pendukung
+│   ├── data/                 # data yang digunakan aplikasi
+│   └── types.ts
+├── public/                   # aset statis dashboard
+├── tests/                    # pengujian pipeline
+├── .env.example              # contoh konfigurasi environment
 ├── .gitignore
-├── docker-compose.yml
+├── docker-compose.yml        # konfigurasi seluruh container
+├── package.json              # dependensi dashboard
+├── vite.config.ts
+├── vercel.json
 ├── README.md
 └── STREAMING_DEMO.md
 ```
@@ -813,49 +831,6 @@ Hal-hal berikut sengaja dijaga di dalam kode maupun tampilan:
    kode zona, jadi tidak mencampur domain satu sama lain.
 
 ---
-
-## Struktur folder
-
-```
-models/                   # berkas .joblib dari data scientist (diabaikan git)
-scripts/
-  aggregate.py            # CSV asli  -> src/data/dashboard.json  (pandas)
-  predict.py              # model .joblib -> src/data/predictions.json (sklearn)
-  generate-mock.mjs       # Pembuat data contoh (Node, tanpa dependensi)
-src/
-  components/
-    ui/                   # Primitif bergaya shadcn (button, card, select, ...)
-    layout/               # AppLayout, Sidebar, TopBar
-    ChartCard.tsx         # Pembungkus seragam untuk semua chart
-    KpiCard.tsx           # Kartu KPI: angka besar + delta + sparkline
-    Sparkline.tsx         # Mini chart tanpa sumbu
-    ChartTooltip.tsx      # Tooltip seragam, ikut tema
-    DataTable.tsx         # Tabel: cari + urutkan + paginasi
-    ZoneMap.tsx           # Peta Leaflet + penanda lingkaran
-    ZoneFilter.tsx        # Select zona & rentang waktu
-    ThemeToggle.tsx       # Tombol gelap/terang
-    GlobalSearch.tsx      # Pencarian halaman & zona
-    charts/DonutChart.tsx # Donut + legenda bernilai
-  pages/                  # Satu berkas per rute
-  store/
-    theme.tsx             # Konteks tema (localStorage)
-    filters.tsx           # Konteks filter global (localStorage)
-  hooks/                  # use-dashboard, use-chart-colors, use-media-query, ...
-  lib/
-    metrics.ts            # Data + filter  ->  angka siap pakai
-    forecast.ts           # Pembacaan tabel prediksi model
-    colors.ts             # Palet, ambang PM2.5, status zona
-    format.ts             # Format angka & tanggal locale id-ID
-    notes.ts              # Teks catatan kaki tentang cakupan data
-    nav.ts                # Daftar menu (dipakai sidebar & pencarian)
-    utils.ts              # cn(), mean(), sum(), clamp()
-  data/
-    dashboard.json        # <- sumber angka historis
-    predictions.json      # <- hasil model, dibuat scripts/predict.py
-    index.ts
-  types.ts                # Kontrak data
-  index.css               # Design token (CSS variable) + tema Leaflet
-```
 
 ---
 
