@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.env
+logs/
+plugins/
+models/*.joblib
+data/canonical/*/
+data/batch/inbox/*/
+data/stream/seed/*
+data/quarantine/*/
+!data/canonical/README.md
+!data/batch/README.md
+!data/stream/README.md
+!data/quarantine/README.md
