@@ -1,0 +1,17 @@
+source_type,source_location,zone_id,volume_factor
+traffic,ATR-301,Z01,1.00
+traffic,ATR-301,Z02,0.85
+traffic,ATR-301,Z03,0.65
+traffic,ATR-301,Z04,0.45
+air_quality,Aotizhongxin,Z01,
+air_quality,Dongsi,Z01,
+air_quality,Guanyuan,Z01,
+air_quality,Changping,Z02,
+air_quality,Huairou,Z02,
+air_quality,Shunyi,Z02,
+air_quality,Dingling,Z03,
+air_quality,Gucheng,Z03,
+air_quality,Wanliu,Z03,
+air_quality,Nongzhanguan,Z04,
+air_quality,Tiantan,Z04,
+air_quality,Wanshouxigong,Z04,

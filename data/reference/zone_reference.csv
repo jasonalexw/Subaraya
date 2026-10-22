@@ -1,0 +1,5 @@
+zone_id,zone_name,sim_latitude,sim_longitude,road_capacity,speed_limit_kmh
+Z01,Pusat Kota,-7.2575,112.7521,6000,50
+Z02,Kawasan Industri,-7.2450,112.7200,5000,60
+Z03,Permukiman Utara,-7.2100,112.7400,4000,40
+Z04,Area Sekolah,-7.2750,112.7700,3000,30

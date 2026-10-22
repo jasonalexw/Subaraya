@@ -1,0 +1,17 @@
+FROM python:3.11-slim
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends default-jre-headless procps curl && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir pyspark==3.5.3 psycopg2-binary==2.9.10
+
+RUN python -c "from pyspark.sql import SparkSession; s = SparkSession.builder.master('local[1]').config('spark.jars.packages', 'org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3,org.postgresql:postgresql:42.6.0').getOrCreate(); s.stop()"
+
+COPY spark_streaming_metropolia.py ./
+
+ENV PYTHONUNBUFFERED=1
+
+CMD ["python", "spark_streaming_metropolia.py"]

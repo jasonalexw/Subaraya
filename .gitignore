@@ -1,3 +1,4 @@
+# === Dashboard (frontend) ===
 node_modules
 dist
 dist-ssr
@@ -13,5 +14,26 @@ data_raw/*
 .claude/
 
 # Berkas model dari data scientist - terlalu besar untuk git.
-# Hasil prediksinya ada di src/data/predictions.json.
 models/
+
+# === ETL Pipeline ===
+__pycache__/
+*.pyc
+.env
+logs/
+plugins/
+data/canonical/*/
+data/batch/inbox/*/
+data/stream/seed/*
+data/quarantine/*/
+!data/canonical/README.md
+!data/batch/README.md
+!data/stream/README.md
+!data/quarantine/README.md
+# Raw archives and unused samples
+data/raw/traffic/*.zip
+data/raw/traffic/*.gz
+data/raw/air_quality/*.zip
+data/raw/air_quality/*.JPG
+data/raw/air_quality/data.csv
+data/raw/air_quality/test.csv

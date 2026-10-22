@@ -1,0 +1,4 @@
+source_type,source_start_date,source_end_date,simulation_start_date,simulation_end_date
+traffic,2013-03-01,2017-02-28,2022-01-01,2025-12-31
+air_quality,2013-03-01,2017-02-28,2022-01-01,2025-12-31
+accident,2022-01-01,2025-12-31,2022-01-01,2025-12-31
