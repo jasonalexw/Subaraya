@@ -12,3 +12,10 @@ data/quarantine/*/
 !data/batch/README.md
 !data/stream/README.md
 !data/quarantine/README.md
+# Raw archives and unused samples
+data/raw/traffic/*.zip
+data/raw/traffic/*.gz
+data/raw/air_quality/*.zip
+data/raw/air_quality/*.JPG
+data/raw/air_quality/data.csv
+data/raw/air_quality/test.csv
